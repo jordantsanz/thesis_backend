@@ -1,0 +1,9 @@
+/openface
+/openface_new
+/dlib
+get-models.sh
+.DS_Store
+test_video.mp4
+/venv
+name.mp4
+/videos/*
