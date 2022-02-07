@@ -38,7 +38,6 @@ numexpr==2.8.1
 numpy==1.22.1
 opencv-contrib-python==4.5.5.62
 opencv-python==4.5.5.62
-openface==0.2.1
 packaging==21.3
 pandas==1.4.0
 parso==0.8.3
