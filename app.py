@@ -52,8 +52,11 @@ def read_video():
     emotions = {"anger": anger, "sadness": sadness, "fear": fear, "disgust": disgust}
     
     return json.dumps(emotions, indent = 4)
-    
+
+@app.route('/')
+def index():
+    return "<h1>Welcome to our server !!</h1>"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(threaded=True, port=5000)
 
