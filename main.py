@@ -14,9 +14,9 @@ TESTING_AVERAGE = .44
 
 UPLOAD_FOLDER = './videos'
 app = Flask(__name__)
-app.config['CORS_HEADERS'] = 'Content-Type'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
+# app.config['CORS_HEADERS'] = 'Content-Type'
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route("/video", methods=['POST'])
 def read_video():
@@ -57,5 +57,5 @@ def index():
     return "<h1>Welcome to our server !!</h1>"
 
 if __name__ == "__main__":
-    app.run(threaded=True, port=5000)
+    app.run(host='127.0.0.1', port=8080, debug=True)
 
