@@ -5,10 +5,9 @@ from feat import Detector
 from feat.utils import read_feat
 import pandas as pd
 import os
-import cv2
 from feat.tests.utils import get_test_data_path
 from werkzeug.utils import secure_filename
-import os, glob
+import os
 import json
 
 TESTING_AVERAGE = .44
