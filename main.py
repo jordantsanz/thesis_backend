@@ -1,36 +1,40 @@
 import math
-from flask import Flask, request
+from flask import Flask, app, request
 from flask_cors import CORS
 from feat import Detector
 from feat.utils import read_feat
+from google.cloud import storage
 import pandas as pd
 import os
 from feat.tests.utils import get_test_data_path
 from werkzeug.utils import secure_filename
-import os
 import json
 
 TESTING_AVERAGE = .44
 
-UPLOAD_FOLDER = './videos'
-app = Flask(__name__)
-# app.config['CORS_HEADERS'] = 'Content-Type'
-# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-# cors = CORS(app, resources={r"/*": {"origins": "*"}})
+UPLOAD_FOLDER = '/tmp'
+application = Flask(__name__)
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./jsanz-thesis-backend-3ff842a86ceb.json"
+application.config['CORS_HEADERS'] = 'Content-Type'
+application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+cors = CORS(application, resources={r"/*": {"origins": "*"}})
 
-@app.route("/video", methods=['POST'])
+@application.route("/video", methods=['POST'])
 def read_video():
     print('video received')
     video = request.files['video']
     filename = secure_filename(video.filename)
-    video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    print('before save to os')
+    video.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
+    print('after write to os')
     face_model = "retinaface"
-    landmark_model = "mobilenet"
+    landmark_model = "PFLD"
     au_model = "rf"
     emotion_model = "resmasknet"
+    print('i have no idea anymore')
     detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
     print(filename)
-    video_prediction = detector.detect_video("./videos/" + filename, skip_frames=24)
+    video_prediction = detector.detect_video("/tmp/" + filename, skip_frames=24)
     print(video_prediction.emotions())
     # emotions = {
     # "happiness": video_prediction["happiness"],
@@ -42,6 +46,18 @@ def read_video():
     # "neutral": video_prediction["neutral"]
     # }
     # print(emotions)
+    # print('before seek')
+    # video.seek(0)
+    # print('after seek')
+    print('before storage')
+    storage_client = storage.Client()
+    print('storage client: ', storage_client)
+    bucket = storage_client.bucket('jsanz-thesis-backend.appspot.com')
+    print('bucket: ', bucket)
+    blob = bucket.blob(filename)
+    print('blob: ', blob)
+    blob.upload_from_filename("/tmp/" + filename, content_type="video/mp4")
+    print('after upload')
 
     anger = video_prediction["anger"].mean()
     sadness = video_prediction["sadness"].mean()
@@ -52,10 +68,17 @@ def read_video():
     
     return json.dumps(emotions, indent = 4)
 
-@app.route('/')
+@application.route('/')
 def index():
+    print('in index route')
     return "<h1>Welcome to our server !!</h1>"
 
+@application.errorhandler(Exception)
+def error_handler(error):
+    print(error)
+    return "!!!!" + repr(error)
+
+
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=8080, debug=True)
+    application.run(host='127.0.0.1', port=5000, debug=True)
 

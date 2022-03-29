@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "jsanz-thesis-backend",
+  "private_key_id": "3ff842a86ceb9f95abe6aa617adbafd59416424c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCfBAwKymCjq1VK\nZc1JJhzr8DcyMBWpm+NyIN/6+BW9WO/ora1o5B6G+XH178ZtwIeQ5mbUwYibioDH\naFDcC8aOUNk/bP0JIVirx9OHrn4MIRbrvX+pkRTlS4z29T2HdHMVl/aImyo48ta8\n4JlCpsGWrm9ez1ypiJo5aNu5MciD4YMMfT95uj+D2K5/9D785Wu9r1ao3uFTOqUQ\n+xxOAMXtB4nWwCR3UGOsTVvtm11nDy2eHlix0vWzN0NZNFTeIllGpiExXFG95LT3\ndA7nKyrMOMi5LjdbKi9zO3u4Uo9H0L5MV9ySv7nKleZ/BZopsOdZHzKf+5G3iVEb\neCoohG/PAgMBAAECggEACY5iNOHNpfhdc0+j4yH9ufYhMwxtuNgr9odgPoJbOBpY\nrJiHY9bVuNHT1e5Xc/AOlZgrFN0emw5bR+COf3Lbt2DHdYbUvBA7dnNXVH+ZhpwU\ndw1X1zZnVZJRQeQiEvpeEi2kPLhqdKqvWgF7ZGSGHMqV2dJHZM7XSdzx23LQ9I/o\nHz7JNtC2PBvxHYj/8kr1THtK6kvdW+RTnuiWG5j0uIQolwd+tnvqxA6BsB3yjuY8\nkEc955SfTHSJPsNpOimfPSwRn4Z5Cr+VImqMpjNs5BIaDFZospgK+pjTSVbBbgDl\nfq3DOuj4tfjgEUEbUNr1GJENqT++z5d7RkXpHI8TWQKBgQDQhUaLOU3RmHG+s6eu\nBHGkBA+rAbhQJfMgfxNrcR8pNBp+UGgICVHJ5+4KP3Sjw/ho8lW9iq9zicdjQMrz\nVhPzshjYV+AG8jaUp4fggC11S5NJyZ/V9/u4pkjO3JeTC1T8fK8wfayQc/f81N9V\neN4W1Rl2VoPicuVyA7U93Nvg6QKBgQDDOR94L4dNqLOGHE5KO3C4IRBzfNmx/CC2\nYG1UGMYpalErbWEADw307i6FaWfX1td+Z982xd2LYwEzcAVIVuTeXMuAlJR3siCZ\nBB8STmqcBeVI9S5wZu+Si9TQytPtdu3dEtGpBCEg5F/3PbgfUYyV+3LzvomWi+SW\nRugLj+2X9wKBgFcxI4pb79pQsF9ZqCfv28UFnbeYBIYfGEbiXDB1IN6N1vYykQ2r\nN/QBc1v9pLxF2b2od4nGUA8z8ZfjI/oUaEtikVkFhbvh1EjctMh/UILXk0MreBZ0\nl2FixtcZDpiCCIt7Z5YTNvFATNX//VM0M0nA2eDN1GAAQ0klm8e+boLhAoGBAIXV\nIz3BV4BlpqzJuuIo3Z1dDWoerR7XOZXNhSWh1jeOKxcaZOUlbOv8XOgY2pedMR33\nF471Fmv381rP8M8mwr+t3dTIBwAHnVFJAgQKvgs3/3eEndFwv8w3EC4S3jZs0aQ8\nwn6b1ho2dZOJPDA8N6SaPLPca3ZJcOuUsH88rCUBAoGAbcgKQReVhpH37qDvXW0z\n/onmbBYaUTqEXiO1d10Yh2uwPH3w4fwoCYb3wp+jNXwHDPvYJV9V5IzC9RedvD2B\nwtPqoT4TSfPckG1BZsAeJ71cbz/uFYoTxENxVQfhYNqWkCwbsMvWScR1L+gNx/a8\nOc5fEbRaaMNnmdJ+0fOlBXc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "jsanz-thesis-backend-account@jsanz-thesis-backend.iam.gserviceaccount.com",
+  "client_id": "103736968080688018719",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/jsanz-thesis-backend-account%40jsanz-thesis-backend.iam.gserviceaccount.com"
+}
