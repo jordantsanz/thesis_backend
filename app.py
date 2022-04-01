@@ -14,12 +14,13 @@ TESTING_AVERAGE = .44
 
 UPLOAD_FOLDER = '/tmp'
 app = Flask(__name__)
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./jsanz-thesis-backend-3ff842a86ceb.json"
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./jsanz-thesis-backend-3ff842a86ceb.json"
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route("/video", methods=['POST'])
+@cross_origin()
 def read_video():
     print('video received')
     print(request)
@@ -35,9 +36,9 @@ def read_video():
     emotion_model = "resmasknet"
     print('i have no idea anymore')
     detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
-    print('filename: ', filename)
-    video_prediction = detector.detect_video("/tmp/" + filename, skip_frames=24)
-    print('emotions: ', video_prediction.emotions())
+    # print('filename: ', filename)
+    # video_prediction = detector.detect_video("/tmp/" + filename, skip_frames=24)
+    # print('emotions: ', video_prediction.emotions())
     # emotions = {
     # "happiness": video_prediction["happiness"],
     # "anger": video_prediction["anger"], 
@@ -51,24 +52,25 @@ def read_video():
     # print('before seek')
     # video.seek(0)
     # print('after seek')
-    print('before storage')
-    storage_client = storage.Client()
-    print('storage client: ', storage_client)
-    bucket = storage_client.bucket('jsanz-thesis-backend.appspot.com')
-    print('bucket: ', bucket)
-    blob = bucket.blob(filename)
-    print('blob: ', blob)
-    blob.upload_from_filename("/tmp/" + filename, content_type="video/mp4")
-    print('after upload')
+    # print('before storage')
+    # storage_client = storage.Client()
+    # print('storage client: ', storage_client)
+    # bucket = storage_client.bucket('jsanz-thesis-backend.appspot.com')
+    # print('bucket: ', bucket)
+    # blob = bucket.blob(filename)
+    # print('blob: ', blob)
+    # blob.upload_from_filename("/tmp/" + filename, content_type="video/mp4")
+    # print('after upload')
 
-    anger = video_prediction["anger"].mean()
-    sadness = video_prediction["sadness"].mean()
-    fear = video_prediction["fear"].mean()
-    disgust = video_prediction["disgust"].mean()
+    # anger = video_prediction["anger"].mean()
+    # sadness = video_prediction["sadness"].mean()
+    # fear = video_prediction["fear"].mean()
+    # disgust = video_prediction["disgust"].mean()
 
-    emotions = {"anger": anger, "sadness": sadness, "fear": fear, "disgust": disgust}
+    # emotions = {"anger": anger, "sadness": sadness, "fear": fear, "disgust": disgust}
     
-    return json.dumps(emotions, indent = 4)
+    # return json.dumps(emotions, indent = 4)
+    return 'hi'
 
 @app.route('/')
 def index():
