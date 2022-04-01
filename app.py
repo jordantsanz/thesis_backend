@@ -13,19 +13,19 @@ import json
 TESTING_AVERAGE = .44
 
 UPLOAD_FOLDER = '/tmp'
-application = Flask(__name__)
+app = Flask(__name__)
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./jsanz-thesis-backend-3ff842a86ceb.json"
-application.config['CORS_HEADERS'] = 'Content-Type'
-application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-cors = CORS(application, resources={r"/*": {"origins": "*"}})
+app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-@application.route("/video", methods=['POST'])
+@app.route("/video", methods=['POST'])
 def read_video():
     print('video received')
     video = request.files['video']
     filename = secure_filename(video.filename)
     print('before save to os')
-    video.save(os.path.join(application.config['UPLOAD_FOLDER'], filename))
+    video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     print('after write to os')
     face_model = "retinaface"
     landmark_model = "PFLD"
@@ -68,17 +68,17 @@ def read_video():
     
     return json.dumps(emotions, indent = 4)
 
-@application.route('/')
+@app.route('/')
 def index():
     print('in index route')
     return "<h1>Welcome to our server !!</h1>"
 
-@application.errorhandler(Exception)
+@app.errorhandler(Exception)
 def error_handler(error):
     print(error)
     return "!!!!" + repr(error)
 
 
 if __name__ == "__main__":
-    application.run(host='127.0.0.1', port=5000, debug=True)
+    app.run(host='127.0.0.1', port=5000, debug=True)
 
