@@ -22,6 +22,8 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 @app.route("/video", methods=['POST'])
 def read_video():
     print('video received')
+    print(request)
+    print(request.files)
     video = request.files['video']
     filename = secure_filename(video.filename)
     print('before save to os')
@@ -33,9 +35,9 @@ def read_video():
     emotion_model = "resmasknet"
     print('i have no idea anymore')
     detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
-    print(filename)
+    print('filename: ', filename)
     video_prediction = detector.detect_video("/tmp/" + filename, skip_frames=24)
-    print(video_prediction.emotions())
+    print('emotions: ', video_prediction.emotions())
     # emotions = {
     # "happiness": video_prediction["happiness"],
     # "anger": video_prediction["anger"], 
