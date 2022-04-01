@@ -20,7 +20,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route("/video", methods=['POST'])
-@cross_origin()
 def read_video():
     print('video received')
     print(request)
