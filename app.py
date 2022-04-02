@@ -31,10 +31,11 @@ def read_video():
     filename = secure_filename(video.filename)
     print(filename, 'filename')
     print('directory: ', os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     print('after write to os')
-    print("file exists?", os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)))
     print('current directory: ', os.path.curdir)
+    video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    print("file exists?", os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)))
+
     # video_prediction = detector.detect_video(os.path.join(app.config['UPLOAD_FOLDER'], filename), skip_frames=24)
     # print('emotions: ', video_prediction.emotions())
     # emotions = {
