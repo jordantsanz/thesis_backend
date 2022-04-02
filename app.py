@@ -18,6 +18,11 @@ app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
+face_model = "retinaface"
+landmark_model = "PFLD"
+au_model = "rf"
+emotion_model = "resmasknet"
+detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
 
 @app.route("/video", methods=['POST'])
 def read_video():
@@ -29,12 +34,7 @@ def read_video():
     print('before save to os')
     video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     print('after write to os')
-    face_model = "retinaface"
-    landmark_model = "PFLD"
-    au_model = "rf"
-    emotion_model = "resmasknet"
     print('i have no idea anymore')
-    detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
     print('detector loaded: ', filename)
     # video_prediction = detector.detect_video("/tmp/" + filename, skip_frames=24)
     # print('emotions: ', video_prediction.emotions())
