@@ -27,6 +27,7 @@ landmark_model = "PFLD"
 au_model = "rf"
 emotion_model = "rf"
 detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
+print('LOADED. READY TO LISTEN.')
 
 @app.route("/video", methods=['POST'])
 def read_video():
@@ -41,7 +42,7 @@ def read_video():
     video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     print("file exists?", os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)))
 
-    video_prediction = detector.detect_video(os.path.join(app.config['UPLOAD_FOLDER'], filename), skip_frames=24)
+    video_prediction = detector.detect_video(os.path.join(app.config['UPLOAD_FOLDER'], filename), skip_frames=500)
     print('emotions: ', video_prediction.emotions())
     emotions = {
     "happiness": video_prediction["happiness"],
@@ -81,4 +82,4 @@ def error_handler(error):
 
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
