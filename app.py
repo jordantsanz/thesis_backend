@@ -18,6 +18,7 @@ app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
+print('current directory: ', os.listdir("."))
 # face_model = "retinaface"
 # landmark_model = "PFLD"
 # au_model = "rf"
@@ -33,6 +34,7 @@ def read_video():
     print('directory: ', os.path.join(app.config['UPLOAD_FOLDER'], filename))
     print('after write to os')
     print('current directory: ', os.path.curdir)
+
     video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     print("file exists?", os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)))
 
