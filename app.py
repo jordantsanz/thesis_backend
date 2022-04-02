@@ -12,45 +12,48 @@ import json
 
 TESTING_AVERAGE = .44
 
-UPLOAD_FOLDER = './videos'
+UPLOAD_FOLDER = 'videos'
 app = Flask(__name__)
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./jsanz-thesis-backend-3ff842a86ceb.json"
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
-face_model = "retinaface"
-landmark_model = "PFLD"
-au_model = "rf"
-emotion_model = "rf"
-detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
+# face_model = "retinaface"
+# landmark_model = "PFLD"
+# au_model = "rf"
+# emotion_model = "rf"
+# detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
 
 @app.route("/video", methods=['POST'])
 def read_video():
     video = request.files['video']
+    print('video gotten', video)
     filename = secure_filename(video.filename)
+    print(filename, 'filename')
+    print('directory: ', os.path.join(app.config['UPLOAD_FOLDER'], filename))
     video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     print('after write to os')
-    print('i have no idea anymore')
-    print('detector loaded: ', filename)
-    video_prediction = detector.detect_video("./videos/" + filename, skip_frames=24)
-    print('emotions: ', video_prediction.emotions())
-    emotions = {
-    "happiness": video_prediction["happiness"],
-    "anger": video_prediction["anger"], 
-    "disgust": video_prediction["disgust"], 
-    "fear": video_prediction["fear"], 
-    "sadness": video_prediction["sadness"],
-    "surprise": video_prediction["surprise"],
-    "neutral": video_prediction["neutral"]
-    }
-    print(emotions)
+    print("file exists?", os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)))
+    print('current directory: ', os.path.curdir)
+    # video_prediction = detector.detect_video(os.path.join(app.config['UPLOAD_FOLDER'], filename), skip_frames=24)
+    # print('emotions: ', video_prediction.emotions())
+    # emotions = {
+    # "happiness": video_prediction["happiness"],
+    # "anger": video_prediction["anger"], 
+    # "disgust": video_prediction["disgust"], 
+    # "fear": video_prediction["fear"], 
+    # "sadness": video_prediction["sadness"],
+    # "surprise": video_prediction["surprise"],
+    # "neutral": video_prediction["neutral"]
+    # }
+    # print(emotions)
 
-    anger = video_prediction["anger"].mean()
-    sadness = video_prediction["sadness"].mean()
-    fear = video_prediction["fear"].mean()
-    disgust = video_prediction["disgust"].mean()
+    # anger = video_prediction["anger"].mean()
+    # sadness = video_prediction["sadness"].mean()
+    # fear = video_prediction["fear"].mean()
+    # disgust = video_prediction["disgust"].mean()
 
-    emotions = {"anger": anger, "sadness": sadness, "fear": fear, "disgust": disgust}
+    # emotions = {"anger": anger, "sadness": sadness, "fear": fear, "disgust": disgust}
     
     return json.dumps(emotions, indent = 4)
 
