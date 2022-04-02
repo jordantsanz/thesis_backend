@@ -76,6 +76,12 @@ def index():
     print('in index route')
     return "<h1>Welcome to our server !!</h1>"
 
+@app.route('/test', methods=['POST'])
+def test_routes():
+    print('test')
+    print('request: ', request)
+    return "success"
+
 @app.errorhandler(Exception)
 def error_handler(error):
     print(error)
