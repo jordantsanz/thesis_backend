@@ -18,7 +18,10 @@ app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
+if not os.path.exists('videos'):
+    os.mkdir('videos')
 print('current directory: ', os.listdir("."))
+
 # face_model = "retinaface"
 # landmark_model = "PFLD"
 # au_model = "rf"
