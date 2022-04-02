@@ -12,7 +12,7 @@ import json
 
 TESTING_AVERAGE = .44
 
-UPLOAD_FOLDER = '/tmp'
+UPLOAD_FOLDER = '/videos'
 app = Flask(__name__)
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./jsanz-thesis-backend-3ff842a86ceb.json"
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -36,40 +36,27 @@ def read_video():
     print('after write to os')
     print('i have no idea anymore')
     print('detector loaded: ', filename)
-    # video_prediction = detector.detect_video("/tmp/" + filename, skip_frames=24)
-    # print('emotions: ', video_prediction.emotions())
-    # emotions = {
-    # "happiness": video_prediction["happiness"],
-    # "anger": video_prediction["anger"], 
-    # "disgust": video_prediction["disgust"], 
-    # "fear": video_prediction["fear"], 
-    # "sadness": video_prediction["sadness"],
-    # "surprise": video_prediction["surprise"],
-    # "neutral": video_prediction["neutral"]
-    # }
-    # print(emotions)
-    # print('before seek')
-    # video.seek(0)
-    # print('after seek')
-    # print('before storage')
-    # storage_client = storage.Client()
-    # print('storage client: ', storage_client)
-    # bucket = storage_client.bucket('jsanz-thesis-backend.appspot.com')
-    # print('bucket: ', bucket)
-    # blob = bucket.blob(filename)
-    # print('blob: ', blob)
-    # blob.upload_from_filename("/tmp/" + filename, content_type="video/mp4")
-    # print('after upload')
+    video_prediction = detector.detect_video("/videos/" + filename, skip_frames=24)
+    print('emotions: ', video_prediction.emotions())
+    emotions = {
+    "happiness": video_prediction["happiness"],
+    "anger": video_prediction["anger"], 
+    "disgust": video_prediction["disgust"], 
+    "fear": video_prediction["fear"], 
+    "sadness": video_prediction["sadness"],
+    "surprise": video_prediction["surprise"],
+    "neutral": video_prediction["neutral"]
+    }
+    print(emotions)
 
-    # anger = video_prediction["anger"].mean()
-    # sadness = video_prediction["sadness"].mean()
-    # fear = video_prediction["fear"].mean()
-    # disgust = video_prediction["disgust"].mean()
+    anger = video_prediction["anger"].mean()
+    sadness = video_prediction["sadness"].mean()
+    fear = video_prediction["fear"].mean()
+    disgust = video_prediction["disgust"].mean()
 
-    # emotions = {"anger": anger, "sadness": sadness, "fear": fear, "disgust": disgust}
+    emotions = {"anger": anger, "sadness": sadness, "fear": fear, "disgust": disgust}
     
-    # return json.dumps(emotions, indent = 4)
-    return 'hi'
+    return json.dumps(emotions, indent = 4)
 
 @app.route('/')
 def index():
@@ -90,4 +77,3 @@ def error_handler(error):
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000, debug=True)
-
