@@ -12,7 +12,7 @@ import json
 
 TESTING_AVERAGE = .44
 
-UPLOAD_FOLDER = '/videos'
+UPLOAD_FOLDER = './videos'
 app = Flask(__name__)
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./jsanz-thesis-backend-3ff842a86ceb.json"
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -26,17 +26,13 @@ detector = Detector(face_model = face_model, landmark_model = landmark_model, au
 
 @app.route("/video", methods=['POST'])
 def read_video():
-    print('video received')
-    print(request)
-    print(request.files)
     video = request.files['video']
     filename = secure_filename(video.filename)
-    print('before save to os')
     video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     print('after write to os')
     print('i have no idea anymore')
     print('detector loaded: ', filename)
-    video_prediction = detector.detect_video("/videos/" + filename, skip_frames=24)
+    video_prediction = detector.detect_video("./videos/" + filename, skip_frames=24)
     print('emotions: ', video_prediction.emotions())
     emotions = {
     "happiness": video_prediction["happiness"],
