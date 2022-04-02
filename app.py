@@ -34,8 +34,8 @@ def read_video():
     au_model = "rf"
     emotion_model = "resmasknet"
     print('i have no idea anymore')
-    # detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
-    # print('filename: ', filename)
+    detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
+    print('detector loaded: ', filename)
     # video_prediction = detector.detect_video("/tmp/" + filename, skip_frames=24)
     # print('emotions: ', video_prediction.emotions())
     # emotions = {
