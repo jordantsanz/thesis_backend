@@ -19,6 +19,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 if not os.path.exists(UPLOAD_FOLDER):
+    print('having to make upload folder...')
     os.mkdir(UPLOAD_FOLDER)
 print('current directory: ', os.listdir("."))
 
