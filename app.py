@@ -9,7 +9,6 @@ import os
 from feat.tests.utils import get_test_data_path
 from werkzeug.utils import secure_filename
 import json
-import psutil
 
 TESTING_AVERAGE = .44
 
