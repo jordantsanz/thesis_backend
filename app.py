@@ -8,7 +8,7 @@ import json
 
 TESTING_AVERAGE = .44
 
-UPLOAD_FOLDER = '/opt/render/project/src/videos'
+UPLOAD_FOLDER = './videos'
 app = Flask(__name__)
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./jsanz-thesis-backend-3ff842a86ceb.json"
 app.config['CORS_HEADERS'] = 'Content-Type'
