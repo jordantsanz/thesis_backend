@@ -7,3 +7,5 @@ test_video.mp4
 /venv
 name.mp4
 /videos/*
+# Python pycache:
+__pycache__/
