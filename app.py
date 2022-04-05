@@ -31,6 +31,7 @@ print('LOADED. READY TO LISTEN.')
 
 @app.route("/video", methods=['POST'])
 def read_video():
+    print('READ VIDEO PATH HIT')
     video = request.files['video']
     print('video gotten', video)
     filename = secure_filename(video.filename)
