@@ -12,14 +12,14 @@ import json
 
 TESTING_AVERAGE = .44
 
-UPLOAD_FOLDER = 'videos'
+UPLOAD_FOLDER = '/opt/render/project/src/videos'
 app = Flask(__name__)
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./jsanz-thesis-backend-3ff842a86ceb.json"
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
-if not os.path.exists('videos'):
-    os.mkdir('videos')
+if not os.path.exists(UPLOAD_FOLDER):
+    os.mkdir(UPLOAD_FOLDER)
 print('current directory: ', os.listdir("."))
 
 face_model = "retinaface"
