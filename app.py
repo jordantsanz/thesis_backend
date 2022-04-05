@@ -26,7 +26,7 @@ face_model = "retinaface"
 landmark_model = "PFLD"
 au_model = "rf"
 emotion_model = "rf"
-detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
+# detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
 print('LOADED. READY TO LISTEN.')
 
 @app.route("/video", methods=['POST'])
