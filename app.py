@@ -28,7 +28,6 @@ au_model = "rf"
 emotion_model = "rf"
 detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
 print('LOADED. READY TO LISTEN.')
-print(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2)
 
 @app.route("/video", methods=['POST'])
 def read_video():
