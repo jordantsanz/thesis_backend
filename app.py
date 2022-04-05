@@ -2,11 +2,7 @@ import math
 from flask import Flask, app, request
 from flask_cors import CORS
 from feat import Detector
-from feat.utils import read_feat
-from google.cloud import storage
-import pandas as pd
 import os
-from feat.tests.utils import get_test_data_path
 from werkzeug.utils import secure_filename
 import json
 
