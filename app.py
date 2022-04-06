@@ -9,7 +9,7 @@ import json
 
 
 TESTING_AVERAGE = .44
-IS_RENDER_COM = True
+IS_RENDER_COM = False
 if IS_RENDER_COM:
     UPLOAD_FOLDER = '/opt/render/project/src/videos'
 else:
@@ -44,6 +44,7 @@ emotion_model = "rf"
 #logging.warning("Right before detector load")
 detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
 #logging.warning('LOADED. READY TO LISTEN.')
+print("LOADED AND LISTENING")
 
 @app.route("/video", methods=['POST'])
 def read_video():
