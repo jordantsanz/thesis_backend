@@ -2,4 +2,3 @@ flask
 gunicorn
 flask-cors
 Werkzeug
-opencv-python-headless==4.3.0.38
