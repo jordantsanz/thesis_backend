@@ -2,3 +2,4 @@ flask
 gunicorn
 flask-cors
 Werkzeug
+opencv-python-headless
