@@ -9,7 +9,7 @@ import json
 
 
 TESTING_AVERAGE = .44
-IS_RENDER_COM = True
+IS_RENDER_COM = False
 if IS_RENDER_COM:
     UPLOAD_FOLDER = '/opt/render/project/src/videos'
 else:
