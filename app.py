@@ -14,17 +14,17 @@ if IS_RENDER_COM:
     UPLOAD_FOLDER = '/opt/render/project/src/videos'
 else:
     UPLOAD_FOLDER = './videos'
-    import google.cloud.logging
-    import logging
+    # import google.cloud.logging
+    # import logging
 
-    # Instantiates a client
-    client = google.cloud.logging.Client()
+    # # Instantiates a client
+    # client = google.cloud.logging.Client()
 
-    # Retrieves a Cloud Logging handler based on the environment
-    # you're running in and integrates the handler with the
-    # Python logging module. By default this captures all logs
-    # at INFO level and higher
-    client.setup_logging()
+    # # Retrieves a Cloud Logging handler based on the environment
+    # # you're running in and integrates the handler with the
+    # # Python logging module. By default this captures all logs
+    # # at INFO level and higher
+    # client.setup_logging()
 
 app = Flask(__name__)
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./jsanz-thesis-backend-3ff842a86ceb.json"
