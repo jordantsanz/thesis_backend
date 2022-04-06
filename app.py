@@ -103,4 +103,4 @@ def error_handler(error):
 
 
 if __name__ == "__main__":
-    app.run(port=int(os.getenv('PORT')), debug=True)
+    app.run(port=5000, debug=True)
