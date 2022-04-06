@@ -35,7 +35,7 @@ if not os.path.exists(UPLOAD_FOLDER):
     print('making upload folder')
     # logging.warning('having to make upload folder...')
     os.mkdir(UPLOAD_FOLDER)
-logging.warning('current directory: ', os.listdir("."))
+# logging.warning('current directory: ', os.listdir("."))
 
 face_model = "retinaface"
 landmark_model = "PFLD"
