@@ -19,8 +19,12 @@ client = google.cloud.logging.Client()
 client.setup_logging()
 
 TESTING_AVERAGE = .44
+IS_RENDER_COM = True
+if IS_RENDER_COM:
+    UPLOAD_FOLDER = '/opt/render/project/src/videos'
+else:
+    UPLOAD_FOLDER = './videos'
 
-UPLOAD_FOLDER = './videos'
 app = Flask(__name__)
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./jsanz-thesis-backend-3ff842a86ceb.json"
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -41,6 +45,7 @@ logging.warning('LOADED. READY TO LISTEN.')
 
 @app.route("/video", methods=['POST'])
 def read_video():
+    print("read video path hit")
     logging.warning('READ VIDEO PATH HIT')
     video = request.files['video']
     logging.warning('video gotten', video)
@@ -53,7 +58,8 @@ def read_video():
     video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     print("file exists?", os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)))
 
-    # video_prediction = detector.detect_video(os.path.join(app.config['UPLOAD_FOLDER'], filename), skip_frames=500)
+    video_prediction = detector.detect_video(os.path.join(app.config['UPLOAD_FOLDER'], filename), skip_frames=500)
+    print("after video prediction")
     # print('emotions: ', video_prediction.emotions())
     # emotions = {
     # "happiness": video_prediction["happiness"],
