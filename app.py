@@ -66,7 +66,29 @@ def read_video():
 
     video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     print("file exists?", os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)))
-    return 'hello'
+    video_prediction = detector.detect_video(os.path.join(app.config['UPLOAD_FOLDER'], filename), skip_frames=500)
+    print("after video prediction")
+    print('emotions: ', video_prediction.emotions())
+    emotions = {
+    "happiness": video_prediction["happiness"],
+    "anger": video_prediction["anger"], 
+    "disgust": video_prediction["disgust"], 
+    "fear": video_prediction["fear"], 
+    "sadness": video_prediction["sadness"],
+    "surprise": video_prediction["surprise"],
+    "neutral": video_prediction["neutral"]
+    }
+    print(emotions)
+
+    anger = video_prediction["anger"].mean()
+    sadness = video_prediction["sadness"].mean()
+    fear = video_prediction["fear"].mean()
+    disgust = video_prediction["disgust"].mean()
+
+    emotions = {"anger": anger, "sadness": sadness, "fear": fear, "disgust": disgust}
+    
+    return json.dumps(emotions, indent = 4)
+
 
 
 if __name__ == '__main__':
