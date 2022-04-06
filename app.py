@@ -1,7 +1,7 @@
 import math
 from flask import Flask, app, request
 from flask_cors import CORS
-from feat import Detector
+# from feat import Detector
 import os
 from werkzeug.utils import secure_filename
 import json
@@ -42,27 +42,27 @@ landmark_model = "PFLD"
 au_model = "rf"
 emotion_model = "rf"
 #logging.warning("Right before detector load")
-detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
+# detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
 #logging.warning('LOADED. READY TO LISTEN.')
 print("LOADED AND LISTENING")
 
 @app.route("/video", methods=['POST'])
 def read_video():
-    print("read video path hit")
-    #logging.warning('READ VIDEO PATH HIT')
-    video = request.files['video']
-    #logging.warning('video gotten', video)
-    filename = secure_filename(video.filename)
-    print(filename, 'filename')
-    print('directory: ', os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    print('after write to os')
-    print('current directory: ', os.path.curdir)
+    # print("read video path hit")
+    # #logging.warning('READ VIDEO PATH HIT')
+    # video = request.files['video']
+    # #logging.warning('video gotten', video)
+    # filename = secure_filename(video.filename)
+    # print(filename, 'filename')
+    # print('directory: ', os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    # print('after write to os')
+    # print('current directory: ', os.path.curdir)
 
-    video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    print("file exists?", os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)))
+    # video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    # print("file exists?", os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)))
 
-    video_prediction = detector.detect_video(os.path.join(app.config['UPLOAD_FOLDER'], filename), skip_frames=500)
-    print("after video prediction")
+    # video_prediction = detector.detect_video(os.path.join(app.config['UPLOAD_FOLDER'], filename), skip_frames=500)
+    # print("after video prediction")
     # print('emotions: ', video_prediction.emotions())
     # emotions = {
     # "happiness": video_prediction["happiness"],
