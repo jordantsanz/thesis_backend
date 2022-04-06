@@ -14,15 +14,23 @@
 
 # [START gae_flex_quickstart]
 from flask import Flask
+from flask_cors import CORS
 
-
+UPLOAD_FOLDER = './videos'
 app = Flask(__name__)
+app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 @app.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
     return 'Hello World!'
+
+@app.route('/video', methods=['POST'])
+def read_video():
+    return 'hello'
 
 
 if __name__ == '__main__':
