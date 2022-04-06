@@ -6,6 +6,7 @@ get-models.sh
 test_video.mp4
 /venv
 name.mp4
-/videos/*
+./videos/*
 # Python pycache:
 __pycache__/
+./tmp
