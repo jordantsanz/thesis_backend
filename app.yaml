@@ -25,3 +25,7 @@ runtime_config:
 # https://cloud.google.com/appengine/docs/flexible/python/configuring-your-app-with-app-yaml
 manual_scaling:
   instances: 1
+resources:
+  cpu: 1
+  memory_gb: 4
+  disk_size_gb: 50
