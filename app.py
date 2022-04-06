@@ -6,17 +6,7 @@ import os
 from werkzeug.utils import secure_filename
 import json
 # Imports the Cloud Logging client library
-import google.cloud.logging
-import logging
 
-# Instantiates a client
-client = google.cloud.logging.Client()
-
-# Retrieves a Cloud Logging handler based on the environment
-# you're running in and integrates the handler with the
-# Python logging module. By default this captures all logs
-# at INFO level and higher
-client.setup_logging()
 
 TESTING_AVERAGE = .44
 IS_RENDER_COM = True
@@ -24,6 +14,17 @@ if IS_RENDER_COM:
     UPLOAD_FOLDER = '/opt/render/project/src/videos'
 else:
     UPLOAD_FOLDER = './videos'
+    import google.cloud.logging
+    import logging
+
+    # Instantiates a client
+    client = google.cloud.logging.Client()
+
+    # Retrieves a Cloud Logging handler based on the environment
+    # you're running in and integrates the handler with the
+    # Python logging module. By default this captures all logs
+    # at INFO level and higher
+    client.setup_logging()
 
 app = Flask(__name__)
 # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./jsanz-thesis-backend-3ff842a86ceb.json"
@@ -31,7 +32,8 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 if not os.path.exists(UPLOAD_FOLDER):
-    logging.warning('having to make upload folder...')
+    print('making upload folder')
+    # logging.warning('having to make upload folder...')
     os.mkdir(UPLOAD_FOLDER)
 logging.warning('current directory: ', os.listdir("."))
 
@@ -39,16 +41,16 @@ face_model = "retinaface"
 landmark_model = "PFLD"
 au_model = "rf"
 emotion_model = "rf"
-logging.warning("Right before detector load")
+#logging.warning("Right before detector load")
 detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
-logging.warning('LOADED. READY TO LISTEN.')
+#logging.warning('LOADED. READY TO LISTEN.')
 
 @app.route("/video", methods=['POST'])
 def read_video():
     print("read video path hit")
-    logging.warning('READ VIDEO PATH HIT')
+    #logging.warning('READ VIDEO PATH HIT')
     video = request.files['video']
-    logging.warning('video gotten', video)
+    #logging.warning('video gotten', video)
     filename = secure_filename(video.filename)
     print(filename, 'filename')
     print('directory: ', os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -84,18 +86,19 @@ def read_video():
 
 @app.route('/')
 def index():
-    logging.warning('in index route')
+    #logging.warning('in index route')
     return "<h1>Welcome to our server !!</h1>"
 
 @app.route('/test', methods=['POST'])
 def test_routes():
-    logging.warning('test')
+    #logging.warning('test')
     print('request: ', request)
     return "success"
 
 @app.errorhandler(Exception)
 def error_handler(error):
-    logging.warning(error)
+    #logging.warning(error)
+    print(error)
     return "!!!!" + repr(error)
 
 
