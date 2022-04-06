@@ -5,6 +5,18 @@ from feat import Detector
 import os
 from werkzeug.utils import secure_filename
 import json
+# Imports the Cloud Logging client library
+import google.cloud.logging
+import logging
+
+# Instantiates a client
+client = google.cloud.logging.Client()
+
+# Retrieves a Cloud Logging handler based on the environment
+# you're running in and integrates the handler with the
+# Python logging module. By default this captures all logs
+# at INFO level and higher
+client.setup_logging()
 
 TESTING_AVERAGE = .44
 
@@ -15,23 +27,23 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 if not os.path.exists(UPLOAD_FOLDER):
-    print('having to make upload folder...')
+    logging.warning('having to make upload folder...')
     os.mkdir(UPLOAD_FOLDER)
-print('current directory: ', os.listdir("."))
+logging.warning('current directory: ', os.listdir("."))
 
 face_model = "retinaface"
 landmark_model = "PFLD"
 au_model = "rf"
 emotion_model = "rf"
-print("Right before detector load")
+logging.warning("Right before detector load")
 detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
-print('LOADED. READY TO LISTEN.')
+logging.warning('LOADED. READY TO LISTEN.')
 
 @app.route("/video", methods=['POST'])
 def read_video():
-    print('READ VIDEO PATH HIT')
+    logging.warning('READ VIDEO PATH HIT')
     video = request.files['video']
-    print('video gotten', video)
+    logging.warning('video gotten', video)
     filename = secure_filename(video.filename)
     print(filename, 'filename')
     print('directory: ', os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -66,18 +78,18 @@ def read_video():
 
 @app.route('/')
 def index():
-    print('in index route')
+    logging.warning('in index route')
     return "<h1>Welcome to our server !!</h1>"
 
 @app.route('/test', methods=['POST'])
 def test_routes():
-    print('test')
+    logging.warning('test')
     print('request: ', request)
     return "success"
 
 @app.errorhandler(Exception)
 def error_handler(error):
-    print(error)
+    logging.warning(error)
     return "!!!!" + repr(error)
 
 

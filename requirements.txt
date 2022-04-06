@@ -74,3 +74,4 @@ typing-extensions==4.0.1
 urllib3==1.26.8
 wcwidth==0.2.5
 Werkzeug==2.0.2
+google-cloud-logging
