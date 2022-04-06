@@ -13,14 +13,40 @@
 # limitations under the License.
 
 # [START gae_flex_quickstart]
-from flask import Flask
+import math
+from flask import Flask, app, request
 from flask_cors import CORS
+from feat import Detector
+import os
+from werkzeug.utils import secure_filename
+import json
 
 UPLOAD_FOLDER = './videos'
 app = Flask(__name__)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
+face_model = "retinaface"
+landmark_model = "PFLD"
+au_model = "rf"
+emotion_model = "rf"
+#logging.warning("Right before detector load")
+detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
+#logging.warning('LOADED. READY TO LISTEN.')
+print("LOADED AND LISTENING")
+
+TESTING_AVERAGE = .44
+IS_RENDER_COM = False
+if IS_RENDER_COM:
+    UPLOAD_FOLDER = '/opt/render/project/src/videos'
+else:
+    UPLOAD_FOLDER = './videos'
+
+if not os.path.exists(UPLOAD_FOLDER):
+    print('making upload folder')
+    # logging.warning('having to make upload folder...')
+    os.mkdir(UPLOAD_FOLDER)
 
 
 @app.route('/')
@@ -30,6 +56,16 @@ def hello():
 
 @app.route('/video', methods=['POST'])
 def read_video():
+    print("read video path hit")
+    video = request.files['video']
+    filename = secure_filename(video.filename)
+    print(filename, 'filename')
+    print('directory: ', os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    print('after write to os')
+    print('current directory: ', os.path.curdir)
+
+    video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    print("file exists?", os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)))
     return 'hello'
 
 

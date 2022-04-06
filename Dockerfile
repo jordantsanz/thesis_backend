@@ -1,9 +1,21 @@
-FROM python:2.7
-WORKDIR /app
+FROM python:3.8.0-slim
+
+# Copy local code to the container image
 COPY . /app
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
+# Sets the working directory
+WORKDIR /app
+
+# Upgrade PIP
+RUN pip install --upgrade pip
 RUN apt-get update
 RUN apt-get install ffmpeg libsm6 libxext6  -y
-EXPOSE 8080
-CMD ["gunicorn", "app:app", "-b", ":8080", "--timeout", "300"]
 
+#Install python libraries from requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Set $PORT environment variable
+ENV PORT 8080
+
+# Run the web service on container startup
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
