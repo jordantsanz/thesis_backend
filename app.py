@@ -66,7 +66,7 @@ def read_video():
 
     video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     print("file exists?", os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)))
-    video_prediction = detector.detect_video(os.path.join(app.config['UPLOAD_FOLDER'], filename), skip_frames=500)
+    video_prediction = detector.detect_video(os.path.join(app.config['UPLOAD_FOLDER'], filename), skip_frames=100)
     print("after video prediction")
     print('emotions: ', video_prediction.emotions())
     emotions = {
