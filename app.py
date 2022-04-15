@@ -27,12 +27,12 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-face_model = "retinaface"
+face_model = "faceboxes"
 landmark_model = "mobilenet"
 au_model = "rf"
-emotion_model = "resmasknet"
+emotion_model = "fer"
 #logging.warning("Right before detector load")
-detector = Detector(face_model = face_model, landmark_model = landmark_model, au_model = au_model, emotion_model = emotion_model)
+detector = Detector(face_model = face_model, landmark_model = landmark_model, emotion_model = emotion_model)
 #logging.warning('LOADED. READY TO LISTEN.')
 print("LOADED AND LISTENING")
 
@@ -66,7 +66,7 @@ def read_video():
 
     video.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     print("file exists?", os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)))
-    video_prediction = detector.detect_video(os.path.join(app.config['UPLOAD_FOLDER'], filename), skip_frames=175)
+    video_prediction = detector.detect_video(os.path.join(app.config['UPLOAD_FOLDER'], filename), skip_frames=98, verbose=True)
     print("after video prediction")
     print('emotions: ', video_prediction.emotions())
     emotions = {
