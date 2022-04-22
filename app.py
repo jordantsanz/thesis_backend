@@ -30,7 +30,7 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 face_model = "faceboxes"
 landmark_model = "mobilenet"
 au_model = "rf"
-emotion_model = "fer"
+emotion_model = "resmasknet"
 #logging.warning("Right before detector load")
 detector = Detector(face_model = face_model, landmark_model = landmark_model, emotion_model = emotion_model)
 #logging.warning('LOADED. READY TO LISTEN.')
