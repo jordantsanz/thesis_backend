@@ -18,6 +18,7 @@ from flask import Flask, app, request
 from flask_cors import CORS
 from feat import Detector
 import os
+import numpy as np
 from werkzeug.utils import secure_filename
 import json
 
@@ -70,13 +71,13 @@ def read_video():
     print("after video prediction")
     print('emotions: ', video_prediction.emotions())
     emotions = {
-    "happiness": video_prediction["happiness"],
-    "anger": video_prediction["anger"], 
-    "disgust": video_prediction["disgust"], 
-    "fear": video_prediction["fear"], 
-    "sadness": video_prediction["sadness"],
-    "surprise": video_prediction["surprise"],
-    "neutral": video_prediction["neutral"]
+    "happiness": video_prediction["happiness"].to_json(orient='values'),
+    "anger": video_prediction["anger"].to_json(orient='values'), 
+    "disgust": video_prediction["disgust"].to_json(orient='values'), 
+    "fear": video_prediction["fear"].to_json(orient='values'),
+    "sadness": video_prediction["sadness"].to_json(orient='values'),
+    "surprise": video_prediction["surprise"].to_json(orient='values'),
+    "neutral": video_prediction["neutral"].to_json(orient='values'),
     }
     print(emotions)
 
@@ -84,10 +85,23 @@ def read_video():
     sadness = video_prediction["sadness"].mean()
     fear = video_prediction["fear"].mean()
     disgust = video_prediction["disgust"].mean()
+    happiness = video_prediction["happiness"].mean()
+    neutral = video_prediction["neutral"].mean()
 
-    emotions = {"anger": anger, "sadness": sadness, "fear": fear, "disgust": disgust}
+    means = {
+        "anger": np.float64(anger),
+        "sadness": np.float64(sadness),
+        "fear": np.float64(fear),
+        "disgust": np.float64(disgust),
+        "happiness": np.float64(happiness),
+        "neutral": np.float64(neutral),
+        "dataframe": emotions,
+    }
+
+    print("means: ")
+    print(means)
     
-    return json.dumps(emotions, indent = 4)
+    return json.dumps(means, indent = 4)
 
 
 
