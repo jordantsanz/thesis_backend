@@ -87,6 +87,7 @@ def read_video():
     disgust = video_prediction["disgust"].mean()
     happiness = video_prediction["happiness"].mean()
     neutral = video_prediction["neutral"].mean()
+    surprise = video_prediction["surprise"].mean()
 
     means = {
         "anger": np.float64(anger),
@@ -95,6 +96,7 @@ def read_video():
         "disgust": np.float64(disgust),
         "happiness": np.float64(happiness),
         "neutral": np.float64(neutral),
+        "surprise": np.float64(surprise),
         "dataframe": emotions,
     }
 
