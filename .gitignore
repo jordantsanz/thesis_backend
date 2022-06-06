@@ -10,3 +10,4 @@ name.mp4
 # Python pycache:
 __pycache__/
 ./tmp
+__pycache__
